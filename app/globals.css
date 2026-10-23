@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  --page: #fffdf8;
+  --card: #fffdf8;
+  --inner: #f2eee5;
+  --line: #e7e3d8;
+  --ink: #141033;
+  --ink-hover: #2a2550;
+  --muted: #5c5a73;
+  --accent: #ff5a3c;
+  --accent-dark: #c2412a;
+  --dot: #1f9d61;
+}
+
+@theme inline {
+  --color-page: var(--page);
+  --color-card: var(--card);
+  --color-inner: var(--inner);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-ink-hover: var(--ink-hover);
+  --color-dot: var(--dot);
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-sora), system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--page); color: var(--ink); font-family: var(--font-sans); line-height: 1.55; font-feature-settings: "cv03", "cv04", "cv09", "cv11"; }
+[id] { scroll-margin-top: 80px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Web and Paper views */
+.paper-only { display: none; }
+html[data-view="paper"] body { background: #e9e5da; }
+html[data-view="paper"] .sheet {
+  max-width: 794px; margin: 2.5rem auto 6rem; padding: 4rem 4.5rem;
+  background: var(--card); border: 1px solid var(--line); border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(20,16,51,.08), 0 24px 60px rgba(20,16,51,.14);
+}
+html[data-view="paper"] .web-only { display: none; }
+html[data-view="paper"] .paper-only { display: block; }
+@media (max-width: 809px) {
+  html[data-view="paper"] .sheet { margin: 1rem; padding: 1.75rem 1.25rem; }
+}
+
+@media print {
+  @page { margin: 12mm 0; }
+  html, body { background: #fff !important; }
+  .toolbar, .web-only { display: none !important; }
+  .paper-only { display: block !important; }
+  .sheet { max-width: none !important; margin: 0 !important; padding: 0 18mm !important; border: 0 !important; box-shadow: none !important; background: transparent !important; }
+  .role { break-inside: avoid; }
+  a { color: inherit !important; text-decoration: none !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
